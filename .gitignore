@@ -1,0 +1,21 @@
+# Ambientes Virtuais (Dependências do Python)
+venv/
+env/
+.venv/
+
+# Arquivos compilados do Python (Gerados automaticamente)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Variáveis de ambiente (Para não vazar senhas ou chaves no futuro)
+.env
+
+# Configurações de IDEs (VS Code, PyCharm, etc.)
+.vscode/
+.idea/
+
+# Arquivos temporários de Sistema Operacional
+.DS_Store
+Thumbs.db

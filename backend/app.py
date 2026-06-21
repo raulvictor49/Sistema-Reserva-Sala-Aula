@@ -1,19 +1,43 @@
-from flask import Flask, jsonify
-from backend.rotas import rotas_bp # Importa as rotas no outro arquivo
+from flask import Flask, jsonify, request
+from rotas import rotas_bp
+import logging
+from datetime import datetime
 
-# Inicializa o aplicativo Flask
+# 1. Configuração para ocultar os logs "feios" padrão do Flask
+# Assim, apenas o nosso log estruturado e bonito vai aparecer no terminal
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
 app = Flask(__name__)
-
 # Registra todas as rotas do arquivo rotas.py no aplicativo principal
 app.register_blueprint(rotas_bp)
+
+# A anotação @app.after_request faz o Flask rodar essa função 
+# automaticamente DEPOIS que qualquer requisição terminar de ser processada.
+@app.after_request
+def registrar_log(response):
+    metodo = request.method
+    rota = request.path
+    ip_cliente = request.remote_addr
+    status = response.status_code
+    
+    # Pegando a hora atual para o log ficar completo
+    agora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    
+    # Ignoramos a rota '/favicon.ico' pois navegadores a chamam sozinhos sem precisarmos logar
+    if rota != '/favicon.ico':
+        # Imprime o log formatado no console do servidor
+        print(f"[{agora}] {metodo} {rota} | Cliente: {ip_cliente} | Resultado: {status}")
+        
+    return response
 
 # Rota de Health-Check (Teste de funcionamento)
 @app.route('/', methods=['GET'])
 def health_check():
     return jsonify({
         "status": "rodando", 
-        "mensagem": "Servidor do Sistema de Reservas - Equipe 02 online!"
+        "mensagem": "Servidor do Sistema de Reservas de Sala de Aula - online!"
     }), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)

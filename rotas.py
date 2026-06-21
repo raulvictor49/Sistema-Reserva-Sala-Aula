@@ -11,7 +11,7 @@ rotas_bp = Blueprint('rotas', __name__)
 # =====================
 @rotas_bp.route('/check', methods=['GET'])
 def check_salas():
-    # Agora recebemos tanto a sala quanto a data
+    # Recebe tanto a sala quanto a data
     sala_solicitada = request.args.get('sala')
     data_solicitada = request.args.get('data')
 
@@ -54,7 +54,7 @@ def reserve_sala():
     sala = dados.get('sala')
     data = dados.get('data')
     hora = dados.get('hora')
-    cliente = dados.get('cliente') # <- NOVO CAMPO ADICIONADO
+    cliente = dados.get('cliente')
 
     # Validações de entrada
     if not cliente: return jsonify({"erro": "Nome do cliente é obrigatório."}), 400

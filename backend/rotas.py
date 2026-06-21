@@ -1,6 +1,6 @@
 import uuid
 from flask import Blueprint, jsonify, request
-from dados import (salas_db, reservas_ativas, lock, 
+from backend.dados import (salas_db, reservas_ativas, lock, 
                    validar_sala, validar_data, validar_horario, horarios_permitidos)
 
 # Cria o agrupador de rotas

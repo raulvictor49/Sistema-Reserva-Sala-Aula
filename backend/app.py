@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from rotas import rotas_bp # Importa as rotas no outro arquivo
+from backend.rotas import rotas_bp # Importa as rotas no outro arquivo
 
 # Inicializa o aplicativo Flask
 app = Flask(__name__)

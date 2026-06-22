@@ -66,7 +66,7 @@ Cancela uma reserva previamente feita através do seu ID único.
       "id": "codigo-gerado-na-reserva"
       }
       
-## 📡 Testando os Comandos via Terminal (cURL)
+## 🔌 Testando os Comandos via Terminal (cURL)
 Abra um novo terminal (preferencialmente Git Bash ou ambiente Linux/Mac) e execute os comandos abaixo para testar o Core do sistema.
 
 1. Reservar Sala (RESERVE)

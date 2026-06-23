@@ -94,15 +94,25 @@ def reserve_sala():
 @rotas_bp.route('/cancel', methods=['POST'])
 def cancel_sala():
     dados = request.json
-    id_reserva = dados.get('id') if dados else None
+    if not dados:
+        return jsonify({"erro": "Nenhum dado enviado."}), 400
 
-    if not id_reserva:
-        return jsonify({"erro": "ID da reserva não informado."}), 400
+    id_reserva = dados.get('id')
+    sala_req = dados.get('sala')
+    data_req = dados.get('data')
+    hora_req = dados.get('hora')
 
     # INÍCIO DA ZONA CRÍTICA (Usando a trava)
     with lock:
-        if id_reserva not in reservas_ativas:
-            return jsonify({"erro": "ID de reserva não encontrado."}), 404
+        # Se não enviou ID, mas enviou sala, data e hora, procura o ID
+        if not id_reserva and (sala_req and data_req and hora_req):
+            for key, info in reservas_ativas.items():
+                if info["sala"] == sala_req and info["data"] == data_req and info["hora"] == hora_req:
+                    id_reserva = key
+                    break
+
+        if not id_reserva or id_reserva not in reservas_ativas:
+            return jsonify({"erro": "Reserva não encontrada."}), 404
 
         # Pega as informações de onde a reserva foi feita
         info = reservas_ativas[id_reserva]
@@ -111,7 +121,8 @@ def cancel_sala():
         hora = info["hora"]
 
         # Libera a sala removendo o horário do banco de dados
-        del salas_db[sala][data][hora]
+        if data in salas_db.get(sala, {}) and hora in salas_db[sala][data]:
+            del salas_db[sala][data][hora]
         
         # Apaga o ID das reservas ativas
         del reservas_ativas[id_reserva]

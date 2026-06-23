@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>Sistema de Reservas de Salas</h1>
-        <p>Acompanhamento em tempo real</p>
+        <p>Acompanhamento em tempo real (Atualização automática a cada 3s)</p>
     </header>
 
     <main>
@@ -29,37 +29,58 @@
                 <label for="data-input">Data:</label>
                 <input type="date" id="data-input" value="2026-06-15">
             </div>
-
-            <button id="btn-atualizar" onclick="carregarGrade()">Atualizar Agora</button>
         </section>
 
         <!-- Grade Horária Visua -->
         <section class="grade-container">
-            <h2>Grade Horária</h2>
+            <div class="grade-header">
+                <h2>Grade Horária</h2>
+                <span class="duracao-aviso">(Cada slot = 1 hora de reserva)</span>
+            </div>
+            
+            <div class="legenda">
+                <span class="legenda-item"><span class="box livre-box"></span> Disponível</span>
+                <span class="legenda-item"><span class="box ocupado-box"></span> Ocupado (Clique para cancelar)</span>
+                <span class="legenda-item"><span class="box selecionado-box"></span> Selecionado</span>
+            </div>
+
             <p id="status-mensagem"></p>
-            <div class="grid" id="grade-horaria">
-                <!-- Blocos gerados via JS -->
+            <div id="grade-horaria">
+                <!-- Blocos gerados via JS separados por turno -->
             </div>
         </section>
 
         <!-- Painel de Ações -->
         <section class="actions-panel">
-            <div class="action-card">
-                <h3>Fazer Reserva</h3>
-                <input type="time" id="reserva-hora" step="3600" min="07:00" max="22:00" title="Apenas horas cheias (ex: 08:00)">
-                <input type="text" id="reserva-cliente" placeholder="Nome do Cliente">
-                <button class="btn-primary" onclick="reservarSala()">Reservar</button>
-                <p id="reserva-feedback" class="feedback"></p>
-            </div>
+            <div class="action-card full-width">
+                <h3>Fazer Reserva Rápida</h3>
+                
+                <div class="resumo-box">
+                    <p id="resumo-texto">Selecione um horário na grade acima para começar.</p>
+                </div>
 
-            <div class="action-card">
-                <h3>Cancelar Reserva</h3>
-                <input type="text" id="cancelar-id" placeholder="ID da Reserva">
-                <button class="btn-danger" onclick="cancelarReserva()">Cancelar</button>
-                <p id="cancel-feedback" class="feedback"></p>
+                <div class="reserva-inline">
+                    <input type="text" id="reserva-cliente" placeholder="Nome do Cliente (Obrigatório)" oninput="validarFormulario()">
+                    <button class="btn-primary" id="btn-confirmar-reserva" onclick="reservarSala()" disabled>Confirmar Reserva</button>
+                </div>
+                <p id="reserva-feedback" class="feedback"></p>
             </div>
         </section>
     </main>
+
+    <!-- Modal de Cancelamento Seguro -->
+    <div id="cancel-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>Cancelar Reserva</h3>
+            <p id="modal-texto"></p>
+            <p class="warning-text">Para continuar, digite <strong>cancelar</strong> no campo abaixo:</p>
+            <input type="text" id="modal-input" placeholder="Digite cancelar..." autocomplete="off">
+            <div class="modal-actions">
+                <button class="btn-cancelar" onclick="fecharModal()">Voltar</button>
+                <button class="btn-danger" id="btn-confirmar-cancelamento" disabled>Cancelar Reserva</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

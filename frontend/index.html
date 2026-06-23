@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Reservas - Equipe 02</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Sistema de Reservas de Salas</h1>
+        <p>Acompanhamento em tempo real</p>
+    </header>
+
+    <main>
+        <section class="controls">
+            <div class="control-group">
+                <label for="sala-select">Selecione a Sala:</label>
+                <select id="sala-select">
+                    <option value="Grad_1">Grad_1</option>
+                    <option value="Grad_2">Grad_2</option>
+                    <option value="Grad_3">Grad_3</option>
+                    <option value="Grad_4">Grad_4</option>
+                    <option value="Grad_5">Grad_5</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="data-input">Data:</label>
+                <input type="date" id="data-input" value="2026-06-15">
+            </div>
+
+            <button id="btn-atualizar" onclick="carregarGrade()">Atualizar Agora</button>
+        </section>
+
+        <!-- Grade Horária Visua -->
+        <section class="grade-container">
+            <h2>Grade Horária</h2>
+            <p id="status-mensagem"></p>
+            <div class="grid" id="grade-horaria">
+                <!-- Blocos gerados via JS -->
+            </div>
+        </section>
+
+        <!-- Painel de Ações -->
+        <section class="actions-panel">
+            <div class="action-card">
+                <h3>Fazer Reserva</h3>
+                <input type="time" id="reserva-hora" step="3600" min="07:00" max="22:00" title="Apenas horas cheias (ex: 08:00)">
+                <input type="text" id="reserva-cliente" placeholder="Nome do Cliente">
+                <button class="btn-primary" onclick="reservarSala()">Reservar</button>
+                <p id="reserva-feedback" class="feedback"></p>
+            </div>
+
+            <div class="action-card">
+                <h3>Cancelar Reserva</h3>
+                <input type="text" id="cancelar-id" placeholder="ID da Reserva">
+                <button class="btn-danger" onclick="cancelarReserva()">Cancelar</button>
+                <p id="cancel-feedback" class="feedback"></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

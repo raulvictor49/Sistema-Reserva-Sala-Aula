@@ -1,6 +1,6 @@
 import uuid
 from flask import Blueprint, jsonify, request
-from dados import (salas_db, reservas_ativas, lock, 
+from dados import (salas_db, reservas_ativas, lock, salvar_banco,
                    validar_sala, validar_data, validar_horario, horarios_permitidos)
 
 # Cria o agrupador de rotas
@@ -77,6 +77,9 @@ def reserve_sala():
         reservas_ativas[id_reserva] = {
             "sala": sala, "data": data, "hora": hora, "cliente": cliente
         }
+        
+        # Salva as alterações em disco
+        salvar_banco()
 
     # FIM DA ZONA CRÍTICA
     return jsonify({
@@ -112,6 +115,9 @@ def cancel_sala():
         
         # Apaga o ID das reservas ativas
         del reservas_ativas[id_reserva]
+        
+        # Salva as alterações em disco
+        salvar_banco()
 
     # FIM DA ZONA CRÍTICA
     return jsonify({"mensagem": "Reserva cancelada com sucesso!"}), 200

@@ -1,0 +1,48 @@
+{
+    "salas_db": {
+        "Grad_1": {
+            "2026-06-23": {
+                "16:00": "Vinicius"
+            },
+            "2026-06-24": {
+                "16:00": "Vini",
+                "17:00": "Vinicius",
+                "18:00": "Vinicius"
+            }
+        },
+        "Grad_2": {},
+        "Grad_3": {
+            "2026-06-23": {}
+        },
+        "Grad_4": {
+            "2026-06-23": {}
+        },
+        "Grad_5": {}
+    },
+    "reservas_ativas": {
+        "fe180cb7551544d18189769c15f4ac9d": {
+            "sala": "Grad_1",
+            "data": "2026-06-23",
+            "hora": "16:00",
+            "cliente": "Vinicius"
+        },
+        "b8201e8e80ab449992ade566a3f1fa21": {
+            "sala": "Grad_1",
+            "data": "2026-06-24",
+            "hora": "16:00",
+            "cliente": "Vini"
+        },
+        "7855c0d975904b53a9a3168dae83d44f": {
+            "sala": "Grad_1",
+            "data": "2026-06-24",
+            "hora": "17:00",
+            "cliente": "Vinicius"
+        },
+        "e0cc4fc3abe44b1c974013b2d113028d": {
+            "sala": "Grad_1",
+            "data": "2026-06-24",
+            "hora": "18:00",
+            "cliente": "Vinicius"
+        }
+    }
+}

@@ -8,7 +8,8 @@ from datetime import datetime
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
-app = Flask(__name__)
+import os
+app = Flask(__name__, static_folder='../frontend', static_url_path='/')
 # Registra todas as rotas do arquivo rotas.py no aplicativo principal
 app.register_blueprint(rotas_bp)
 
@@ -32,12 +33,16 @@ def registrar_log(response):
     return response
 
 # Rota de Health-Check (Teste de funcionamento)
-@app.route('/', methods=['GET'])
+@app.route('/api/health', methods=['GET'])
 def health_check():
     return jsonify({
         "status": "rodando", 
         "mensagem": "Servidor do Sistema de Reservas de Sala de Aula - online!"
     }), 200
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)

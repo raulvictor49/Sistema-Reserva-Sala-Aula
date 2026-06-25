@@ -1,0 +1,428 @@
+:root {
+    --bg-color: #f5f5f5;
+    --text-color: #212121;
+    --text-light: #757575;
+    --primary-color: #db1e2f;
+    --primary-hover: #c51b2a;
+    --success-bg: #e8f5e9;
+    --success-text: #2e7d32;
+    --danger-color: #db1e2f;
+    --danger-hover: #c51b2a;
+    --card-bg: #ffffff;
+    --border-radius: 8px;
+    --border-color: #e0e0e0;
+}
+
+body {
+    font-family: 'Roboto', 'Open Sans', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+    padding: 2rem 0;
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+}
+
+header p {
+    margin: 8px 0 0 0;
+    font-size: 0.95rem;
+    color: var(--text-light);
+}
+
+main {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.controls, .grade-container, .action-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    margin-bottom: 24px;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px;
+}
+
+label {
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input, select {
+    padding: 12px 14px;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus {
+    border-color: var(--primary-color);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#btn-atualizar {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid var(--border-color);
+}
+
+#btn-atualizar:hover {
+    background-color: #e2e8f0;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(219, 30, 47, 0.3);
+}
+
+.btn-primary:disabled {
+    background-color: #e0e0e0;
+    color: #9e9e9e;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background-color: var(--danger-hover);
+}
+
+.btn-danger:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-cancelar {
+    background-color: transparent;
+    color: var(--text-light);
+}
+
+.btn-cancelar:hover {
+    background-color: #f1f5f9;
+}
+
+/* Grade Horária */
+.grade-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.grade-container h2 {
+    margin: 0;
+    color: #212121;
+    font-size: 1.25rem;
+}
+
+.duracao-aviso {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.legenda {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+    color: var(--text-color);
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.box {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+}
+
+.livre-box {
+    background-color: #ffffff;
+    border-left: 4px solid var(--success-text);
+}
+
+.ocupado-box {
+    background-color: #fef2f2;
+    border-left: 4px solid var(--danger-color);
+}
+
+.selecionado-box {
+    background-color: #e3f2fd;
+    border-left: 4px solid #1976d2;
+}
+
+.turno-container {
+    margin-bottom: 25px;
+}
+
+.turno-titulo {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.bloco-horario {
+    padding: 16px 10px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--border-color);
+}
+
+.livre {
+    background-color: #ffffff;
+    border-left: 4px solid var(--success-text);
+}
+
+.livre:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+}
+
+.ocupado {
+    background-color: #fef2f2;
+    border-left: 4px solid var(--danger-color);
+    color: #991b1b;
+}
+
+.ocupado:hover {
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+    transform: translateY(-2px);
+}
+
+.bloco-horario span:first-child {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #0f172a;
+}
+
+.ocupado span:first-child {
+    color: #991b1b;
+}
+
+.selecionado {
+    background-color: #e3f2fd;
+    border-left: 4px solid #1976d2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.15);
+}
+
+.selecionado span:first-child {
+    color: #1976d2;
+}
+
+.selecionado .info-status {
+    color: #1565c0;
+    font-weight: 600;
+}
+
+.info-status {
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 6px;
+    color: var(--text-light);
+}
+
+.ocupado .info-status {
+    color: #b91c1c;
+    font-weight: 500;
+}
+
+#status-mensagem {
+    color: var(--text-light) !important;
+    font-size: 0.85rem;
+}
+
+/* Formulário de Reserva Inline */
+.reserva-inline {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.reserva-inline input {
+    flex: 1;
+}
+
+.action-card h3 {
+    margin: 0 0 15px 0;
+    color: #212121;
+    font-size: 1.1rem;
+}
+
+.resumo-box {
+    background-color: #f5f5f5;
+    border: 1px dashed #bdbdbd;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#resumo-texto {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.feedback {
+    font-size: 0.9rem;
+    margin: 15px 0 0 0;
+    min-height: 1.5em;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    display: none;
+}
+
+.feedback:not(:empty) {
+    display: block;
+}
+
+.sucesso { 
+    background-color: var(--success-bg);
+    color: var(--success-text); 
+}
+.erro { 
+    background-color: #fef2f2;
+    color: #b91c1c; 
+}
+
+/* Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay:not(.hidden) .modal-content {
+    transform: translateY(0);
+}
+
+.modal-content h3 {
+    margin: 0 0 10px 0;
+    color: #0f172a;
+}
+
+.modal-content p {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.warning-text {
+    font-size: 0.85rem;
+    color: var(--danger-color) !important;
+    background: #fef2f2;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.modal-content input {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}

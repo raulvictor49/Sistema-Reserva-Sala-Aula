@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Reservas - Equipe 02</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Sistema de Reservas de Salas</h1>
+        <p>Acompanhamento em tempo real (Atualização automática a cada 3s)</p>
+    </header>
+
+    <main>
+        <section class="controls">
+            <div class="control-group">
+                <label for="sala-select">Selecione a Sala:</label>
+                <select id="sala-select">
+                    <option value="Grad_1">Grad_1</option>
+                    <option value="Grad_2">Grad_2</option>
+                    <option value="Grad_3">Grad_3</option>
+                    <option value="Grad_4">Grad_4</option>
+                    <option value="Grad_5">Grad_5</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="data-input">Data:</label>
+                <input type="date" id="data-input" value="2026-06-15">
+            </div>
+        </section>
+
+        <!-- Grade Horária Visua -->
+        <section class="grade-container">
+            <div class="grade-header">
+                <h2>Grade Horária</h2>
+                <span class="duracao-aviso">(Cada slot = 1 hora de reserva)</span>
+            </div>
+            
+            <div class="legenda">
+                <span class="legenda-item"><span class="box livre-box"></span> Disponível</span>
+                <span class="legenda-item"><span class="box ocupado-box"></span> Ocupado (Clique para cancelar)</span>
+                <span class="legenda-item"><span class="box selecionado-box"></span> Selecionado</span>
+            </div>
+
+            <p id="status-mensagem"></p>
+            <div id="grade-horaria">
+                <!-- Blocos gerados via JS separados por turno -->
+            </div>
+        </section>
+
+        <!-- Painel de Ações -->
+        <section class="actions-panel">
+            <div class="action-card full-width">
+                <h3>Fazer Reserva Rápida</h3>
+                
+                <div class="resumo-box">
+                    <p id="resumo-texto">Selecione um horário na grade acima para começar.</p>
+                </div>
+
+                <div class="reserva-inline">
+                    <input type="text" id="reserva-cliente" placeholder="Nome do Cliente (Obrigatório)" oninput="validarFormulario()">
+                    <button class="btn-primary" id="btn-confirmar-reserva" onclick="reservarSala()" disabled>Confirmar Reserva</button>
+                </div>
+                <p id="reserva-feedback" class="feedback"></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Cancelamento Seguro -->
+    <div id="cancel-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>Cancelar Reserva</h3>
+            <p id="modal-texto"></p>
+            <p class="warning-text">Para continuar, digite <strong>cancelar</strong> no campo abaixo:</p>
+            <input type="text" id="modal-input" placeholder="Digite cancelar..." autocomplete="off">
+            <div class="modal-actions">
+                <button class="btn-cancelar" onclick="fecharModal()">Voltar</button>
+                <button class="btn-danger" id="btn-confirmar-cancelamento" disabled>Cancelar Reserva</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,18 +1,38 @@
+import json
+import os
 import threading
 from datetime import datetime
 
-# --- ESTRUTURA DE DADOS EM MEMÓRIA ---
-salas_db = {
-    "Grad_1": {},
-    "Grad_2": {},
-    "Grad_3": {},
-    "Grad_4": {},
-    "Grad_5": {}
-}
+ARQUIVO_BANCO = os.path.join(os.path.dirname(__file__), 'banco_reservas.json')
 
-# Dicionário para guardar o ID da reserva e facilitar o CANCEL
-# Formato: { "id_gerado": {"sala": "Grad_1", "data": "2026-06-15", "hora": "08:00"} }
-reservas_ativas = {}
+# --- ESTRUTURA DE DADOS EM MEMÓRIA ---
+# Se o arquivo existir, carrega os dados dele. Senão, inicia vazio.
+if os.path.exists(ARQUIVO_BANCO):
+    with open(ARQUIVO_BANCO, 'r', encoding='utf-8') as f:
+        dados_salvos = json.load(f)
+        salas_db = dados_salvos.get("salas_db", {})
+        reservas_ativas = dados_salvos.get("reservas_ativas", {})
+else:
+    salas_db = {
+        "Grad_1": {},
+        "Grad_2": {},
+        "Grad_3": {},
+        "Grad_4": {},
+        "Grad_5": {}
+    }
+    # Dicionário para guardar o ID da reserva e facilitar o CANCEL
+    # Formato: { "id_gerado": {"sala": "Grad_1", "data": "2026-06-15", "hora": "08:00"} }
+    reservas_ativas = {}
+
+def salvar_banco():
+    """Salva o estado atual em memória no arquivo JSON."""
+    dados_para_salvar = {
+        "salas_db": salas_db,
+        "reservas_ativas": reservas_ativas
+    }
+    with open(ARQUIVO_BANCO, 'w', encoding='utf-8') as f:
+        json.dump(dados_para_salvar, f, ensure_ascii=False, indent=4)
+
 
 # Trava de Concorrência (Lock)
 lock = threading.Lock()

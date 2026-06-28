@@ -26,9 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     const spanNome = document.getElementById('nome-usuario');
     if (spanNome) {
-        spanNome.textContent = "Logado como: " + usuarioLogado;
+        spanNome.textContent = usuarioLogado;
     }
-    
+
     // Configura data atual no input
     const hoje = new Date().toISOString().split('T')[0];
     document.getElementById("data-input").value = hoje;

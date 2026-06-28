@@ -13,13 +13,15 @@
                 "10:00": "Raul Victor"
             },
             "2026-06-28": {
-                "10:00": "rvas@cin.ufpe.br"
+                "10:00": "rvas@cin.ufpe.br",
+                "17:00": "rvas@cin.ufpe.br"
             }
         },
         "Grad_2": {
             "2026-06-23": {},
             "2026-06-28": {
-                "10:00": "rvrv@cin.ufpe.br"
+                "10:00": "rvrv@cin.ufpe.br",
+                "15:00": "rvas@cin.ufpe.br"
             }
         },
         "Grad_3": {
@@ -72,6 +74,18 @@
             "data": "2026-06-28",
             "hora": "10:00",
             "cliente": "rvrv@cin.ufpe.br"
+        },
+        "833a2577146b4810a65dfc5ce279d30f": {
+            "sala": "Grad_1",
+            "data": "2026-06-28",
+            "hora": "17:00",
+            "cliente": "rvas@cin.ufpe.br"
+        },
+        "6866e02a2b44458abd8c528921e41301": {
+            "sala": "Grad_2",
+            "data": "2026-06-28",
+            "hora": "15:00",
+            "cliente": "rvas@cin.ufpe.br"
         }
     },
     "usuarios_db": {

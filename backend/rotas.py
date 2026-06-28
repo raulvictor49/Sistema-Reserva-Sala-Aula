@@ -101,10 +101,14 @@ def cancel_sala():
     sala_req = dados.get('sala')
     data_req = dados.get('data')
     hora_req = dados.get('hora')
+    cliente_req = dados.get('cliente') # Recebe o e-mail de quem clicou em cancelar
+
+    # Se não enviar quem está logado, bloqueia
+    if not cliente_req:
+        return jsonify({"erro": "Usuário não identificado. Faça login novamente."}), 401
 
     # INÍCIO DA ZONA CRÍTICA (Usando a trava)
     with lock:
-        # Se não enviou ID, mas enviou sala, data e hora, procura o ID
         if not id_reserva and (sala_req and data_req and hora_req):
             for key, info in reservas_ativas.items():
                 if info["sala"] == sala_req and info["data"] == data_req and info["hora"] == hora_req:
@@ -114,20 +118,20 @@ def cancel_sala():
         if not id_reserva or id_reserva not in reservas_ativas:
             return jsonify({"erro": "Reserva não encontrada."}), 404
 
-        # Pega as informações de onde a reserva foi feita
         info = reservas_ativas[id_reserva]
+
+        # Se o e-mail de quem fez a reserva for diferente de quem quer cancelar, bloqueia!
+        if info["cliente"] != cliente_req:
+            return jsonify({"erro": "Acesso negado! Você só pode cancelar as suas próprias reservas."}), 403
+
         sala = info["sala"]
         data = info["data"]
         hora = info["hora"]
 
-        # Libera a sala removendo o horário do banco de dados
         if data in salas_db.get(sala, {}) and hora in salas_db[sala][data]:
             del salas_db[sala][data][hora]
         
-        # Apaga o ID das reservas ativas
         del reservas_ativas[id_reserva]
-        
-        # Salva as alterações em disco
         salvar_banco()
 
     # FIM DA ZONA CRÍTICA

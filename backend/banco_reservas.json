@@ -17,7 +17,10 @@
             }
         },
         "Grad_2": {
-            "2026-06-23": {}
+            "2026-06-23": {},
+            "2026-06-28": {
+                "10:00": "rvrv@cin.ufpe.br"
+            }
         },
         "Grad_3": {
             "2026-06-23": {}
@@ -63,10 +66,17 @@
             "data": "2026-06-28",
             "hora": "10:00",
             "cliente": "rvas@cin.ufpe.br"
+        },
+        "d7f2438f3e2e458eb8182246486b6cfc": {
+            "sala": "Grad_2",
+            "data": "2026-06-28",
+            "hora": "10:00",
+            "cliente": "rvrv@cin.ufpe.br"
         }
     },
     "usuarios_db": {
         "rvas@cin.ufpe.br": "admin123",
-        "lpdr@cin.ufpe.br": "admin123"
+        "lpdr@cin.ufpe.br": "admin123",
+        "rvrv@cin.ufpe.br": "admin123"
     }
 }

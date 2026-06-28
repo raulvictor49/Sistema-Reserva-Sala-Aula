@@ -7,9 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <header style="position: relative;">
         <h1>Sistema de Reservas de Salas</h1>
         <p>Acompanhamento em tempo real (Atualização automática a cada 3s)</p>
+        
+        <div style="position: absolute; top: 20px; right: 20px; display: flex; align-items: center;">
+            <span id="nome-usuario" style="margin-right: 15px; font-weight: bold; color: #333;"></span>
+            <button onclick="fazerLogout()" style="background-color: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                Sair
+            </button>
+        </div>
     </header>
 
     <main>

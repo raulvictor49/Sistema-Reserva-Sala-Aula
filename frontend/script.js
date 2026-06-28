@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = '/';
         return;
     }
+    const spanNome = document.getElementById('nome-usuario');
+    if (spanNome) {
+        spanNome.textContent = "Logado como: " + usuarioLogado;
+    }
+    
     // Configura data atual no input
     const hoje = new Date().toISOString().split('T')[0];
     document.getElementById("data-input").value = hoje;
@@ -161,9 +166,9 @@ async function carregarGrade() {
     }
 }
 
-// ==========================================
+// ==============================
 // COMANDO: RESERVE (Faz Reserva)
-// ==========================================
+// ==============================
 async function reservarSala() {
     const cliente = localStorage.getItem('usuarioCin');
     const hora = slotSelecionado; // Usa a variável de estado
@@ -213,17 +218,16 @@ async function reservarSala() {
     }
 }
 
-// Não precisamos mais do cancelarReserva() antigo baseado em ID
-// a menos que queiramos manter a retrocompatibilidade. Como a UI foi limpa, vamos focar no cancelarPorSlot.
 
 // Cancela clicando diretamente na grade
 async function cancelarPorSlot(sala, data, hora) {
     const feedback = document.getElementById("cancel-feedback");
+    const usuarioLogado = localStorage.getItem('usuarioCin');
     try {
         const response = await fetch(`${apiBase}/cancel`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ sala, data, hora })
+            body: JSON.stringify({ sala, data, hora, cliente: usuarioLogado })
         });
 
         const result = await response.json();
@@ -256,9 +260,9 @@ function fecharModal() {
     slotParaCancelar = null;
 }
 
-// ==========================================
+// =================================
 // FUNÇÕES DE UX E VALIDAÇÃO (Novas)
-// ==========================================
+// =================================
 
 function selecionarSlot(hora) {
     slotSelecionado = hora;
@@ -300,3 +304,16 @@ function mostrarFeedback(elemento, msg, tipo) {
         if(elemento.textContent === msg) elemento.textContent = "";
     }, tempo);
 }
+
+// ================
+// FUNÇÃO DE LOGOUT
+// ================
+function fazerLogout() {
+    // 1. Apaga o e-mail salvo na memória do navegador
+    localStorage.removeItem('usuarioCin');
+    
+    // 2. Redireciona o usuário de volta para a tela de Login (rota raiz)
+    window.location.href = '/';
+}
+
+

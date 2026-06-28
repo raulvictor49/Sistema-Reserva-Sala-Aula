@@ -44,6 +44,10 @@ def health_check():
 def login_page():
     return app.send_static_file('login.html')
 
+@app.route('/tela_cadastro')
+def tela_cadastro_page():
+    return app.send_static_file('cadastro.html')
+
 @app.route('/sistema')
 def sistema_page():
     return app.send_static_file('index.html')

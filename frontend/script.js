@@ -18,6 +18,12 @@ let slotParaCancelar = null;
 
 // Inicialização
 document.addEventListener("DOMContentLoaded", () => {
+    const usuarioLogado = localStorage.getItem('usuarioCin');
+    if (!usuarioLogado) {
+        // Se não tem ninguém logado, expulsa de volta para o login
+        window.location.href = '/';
+        return;
+    }
     // Configura data atual no input
     const hoje = new Date().toISOString().split('T')[0];
     document.getElementById("data-input").value = hoje;
@@ -159,7 +165,7 @@ async function carregarGrade() {
 // COMANDO: RESERVE (Faz Reserva)
 // ==========================================
 async function reservarSala() {
-    const cliente = document.getElementById("reserva-cliente").value;
+    const cliente = localStorage.getItem('usuarioCin');
     const hora = slotSelecionado; // Usa a variável de estado
     const sala = salaAtual;
     const data = dataAtual;

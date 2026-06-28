@@ -11,6 +11,9 @@
             },
             "2026-06-27": {
                 "10:00": "Raul Victor"
+            },
+            "2026-06-28": {
+                "10:00": "rvas@cin.ufpe.br"
             }
         },
         "Grad_2": {
@@ -54,6 +57,16 @@
             "data": "2026-06-27",
             "hora": "10:00",
             "cliente": "Raul Victor"
+        },
+        "0bd05504bed940099edc8962b96eac26": {
+            "sala": "Grad_1",
+            "data": "2026-06-28",
+            "hora": "10:00",
+            "cliente": "rvas@cin.ufpe.br"
         }
+    },
+    "usuarios_db": {
+        "rvas@cin.ufpe.br": "admin123",
+        "lpdr@cin.ufpe.br": "admin123"
     }
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Reservas CIn</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; }
+        .login-box { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 300px; text-align: center; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold;}
+        .btn-login { background-color: #0056b3; }
+        .btn-cadastro { background-color: #28a745; }
+        #msg-auth { margin-top: 15px; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Acesso ao Sistema</h2>
+        <input type="email" id="email" placeholder="E-mail (@cin.ufpe.br)" required>
+        <input type="password" id="senha" placeholder="Senha" required>
+        <button class="btn-login" onclick="autenticar('/login')">Entrar</button>
+        <button class="btn-cadastro" onclick="window.location.href='/tela_cadastro'">Cadastre-se</button>
+        <div id="msg-auth"></div>
+    </div>
+
+    <script>
+        async function autenticar(rota) {
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const msg = document.getElementById('msg-auth');
+
+            if (!email.endsWith('@cin.ufpe.br')) {
+                msg.textContent = "Erro: Use seu e-mail do CIn.";
+                msg.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch(rota, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, senha })
+                });
+                
+                const result = await response.json();
+
+                if (response.ok) {
+                    msg.textContent = result.mensagem;
+                    msg.style.color = "green";
+                    if (rota === '/login') {
+                        // Salva o usuário no navegador e redireciona para a grade
+                        localStorage.setItem('usuarioCin', email);
+                        setTimeout(() => window.location.href = '/sistema', 1000);
+                    }
+                } else {
+                    msg.textContent = result.erro;
+                    msg.style.color = "red";
+                }
+            } catch (error) {
+                msg.textContent = "Erro de conexão com o servidor.";
+                msg.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>

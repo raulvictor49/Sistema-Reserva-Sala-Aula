@@ -8,6 +8,9 @@
                 "16:00": "Vini",
                 "17:00": "Vinicius",
                 "18:00": "Vinicius"
+            },
+            "2026-06-27": {
+                "10:00": "Raul Victor"
             }
         },
         "Grad_2": {
@@ -45,6 +48,12 @@
             "data": "2026-06-23",
             "hora": "09:00",
             "cliente": "vini"
+        },
+        "9863c7753cd948afb59c52026f0b96e6": {
+            "sala": "Grad_1",
+            "data": "2026-06-27",
+            "hora": "10:00",
+            "cliente": "Raul Victor"
         }
     }
 }

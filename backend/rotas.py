@@ -1,6 +1,6 @@
 import uuid
 from flask import Blueprint, jsonify, request
-from dados import (salas_db, reservas_ativas, lock, salvar_banco,
+from dados import (salas_db, reservas_ativas, usuarios_db, lock, salvar_banco,
                    validar_sala, validar_data, validar_horario, horarios_permitidos)
 
 # Cria o agrupador de rotas
@@ -132,3 +132,35 @@ def cancel_sala():
 
     # FIM DA ZONA CRÍTICA
     return jsonify({"mensagem": "Reserva cancelada com sucesso!"}), 200
+
+# ==============
+# LOGIN/CADASTRO
+#===============
+@rotas_bp.route('/cadastro', methods=['POST'])
+def cadastrar():
+    dados = request.json
+    email = dados.get('email', '').strip()
+    senha = dados.get('senha', '')
+
+    if not email.endswith('@cin.ufpe.br'):
+        return jsonify({"erro": "Apenas e-mails institucionais (@cin.ufpe.br) são permitidos."}), 403
+
+    with lock:
+        if email in usuarios_db:
+            return jsonify({"erro": "E-mail já cadastrado."}), 409
+        
+        usuarios_db[email] = senha
+        salvar_banco()
+
+    return jsonify({"mensagem": "Cadastro realizado com sucesso!"}), 201
+
+@rotas_bp.route('/login', methods=['POST'])
+def logar():
+    dados = request.json
+    email = dados.get('email', '').strip()
+    senha = dados.get('senha', '')
+
+    if usuarios_db.get(email) == senha:
+        return jsonify({"mensagem": "Login aprovado!", "email": email}), 200
+    else:
+        return jsonify({"erro": "E-mail ou senha incorretos."}), 401

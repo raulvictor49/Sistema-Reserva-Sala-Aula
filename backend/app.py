@@ -41,7 +41,11 @@ def health_check():
     }), 200
 
 @app.route('/')
-def index():
+def login_page():
+    return app.send_static_file('login.html')
+
+@app.route('/sistema')
+def sistema_page():
     return app.send_static_file('index.html')
 
 if __name__ == '__main__':

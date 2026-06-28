@@ -12,6 +12,8 @@ if os.path.exists(ARQUIVO_BANCO):
         dados_salvos = json.load(f)
         salas_db = dados_salvos.get("salas_db", {})
         reservas_ativas = dados_salvos.get("reservas_ativas", {})
+
+        usuarios_db = dados_salvos.get("usuarios_db", {})
 else:
     salas_db = {
         "Grad_1": {},
@@ -23,12 +25,14 @@ else:
     # Dicionário para guardar o ID da reserva e facilitar o CANCEL
     # Formato: { "id_gerado": {"sala": "Grad_1", "data": "2026-06-15", "hora": "08:00"} }
     reservas_ativas = {}
+    usuarios_db = {}
 
 def salvar_banco():
     """Salva o estado atual em memória no arquivo JSON."""
     dados_para_salvar = {
         "salas_db": salas_db,
-        "reservas_ativas": reservas_ativas
+        "reservas_ativas": reservas_ativas,
+        "usuarios_db": usuarios_db
     }
     with open(ARQUIVO_BANCO, 'w', encoding='utf-8') as f:
         json.dump(dados_para_salvar, f, ensure_ascii=False, indent=4)

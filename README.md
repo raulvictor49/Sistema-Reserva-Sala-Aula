@@ -2,11 +2,11 @@
 
 Este projeto é a evolução do sistema de reservas de salas de aula, migrando de sockets puros para uma arquitetura baseada em API RESTful, e agora na **Entrega 3** introduzindo a Interface Gráfica Web com atualização em tempo real e Persistência de Dados.
 
-## 🛠️ Decisão Tecnológica
+##  Decisão Tecnológica
 Para este projeto, optamos por utilizar **Python com o framework Flask**. 
 A escolha se justifica pela leveza e simplicidade do framework, que nos permite focar na lógica de sistemas distribuídos (como o controle de concorrência e o estado em memória) sem a complexidade de configurações pesadas. O Flask lida nativamente com requisições HTTP e payloads JSON, o que atende perfeitamente ao requisito de arquitetura de alto nível proposta para o cliente-servidor.
 
-## 📂 Estrutura do Projeto
+##  Estrutura do Projeto
 O projeto foi separado em camadas (backend/frontend) para maior organização:
 * `backend/app.py`: Servidor base, inicialização do Flask e interceptador de logs operacionais. Servidor de arquivos estáticos da interface.
 * `backend/rotas.py`: Controladores que lidam com os comandos HTTP e payloads JSON.
@@ -14,7 +14,7 @@ O projeto foi separado em camadas (backend/frontend) para maior organização:
 * `backend/requirements.txt`: Dependências do projeto.
 * `frontend/`: Contém a interface gráfica da aplicação (`index.html`, `style.css` e `script.js`).
 
-## 🚀 Como rodar o projeto
+##  Como rodar o projeto
 
 1. Clone este repositório.
 2. Certifique-se de ter o Python instalado.
@@ -35,7 +35,7 @@ O projeto foi separado em camadas (backend/frontend) para maior organização:
    ```
 O servidor estará rodando em http://localhost:5000/. Ao acessar este endereço no navegador, você será redirecionado para a **Interface Gráfica**.
 
-## 📡 Protocolo de Comunicação (Rotas e Payloads)
+##  Protocolo de Comunicação (Rotas e Payloads)
 
 1. Consultar Salas (CHECK)
 Retorna o estado de todas as salas para uma data específica.
@@ -75,7 +75,7 @@ Cancela uma reserva previamente feita através do seu ID único.
       "id": "codigo-gerado-na-reserva"
       }
       
-## 🔌 Testando os Comandos via Terminal (cURL)
+##  Testando os Comandos via Terminal (cURL)
 Abra um novo terminal (preferencialmente Git Bash ou ambiente Linux/Mac) e execute os comandos abaixo para testar o Core do sistema.
 
 1. Reservar Sala (RESERVE)
@@ -98,7 +98,7 @@ Cancela uma reserva previamente feita através do ID único gerado no comando RE
      -d '{"id": "COLOQUE_O_ID_GERADO_AQUI"}'
      ```
 
-## 🌐 Testando a Interface Gráfica (Entrega 3)
+##  Testando a Interface Gráfica (Entrega 3)
 
 Com o servidor rodando (`python app.py`), abra o seu navegador e acesse **http://localhost:5000/**.
 

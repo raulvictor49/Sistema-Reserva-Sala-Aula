@@ -1,4 +1,4 @@
-# Sistema de Reservas de Salas de Estudo - Equipe 02
+# Sistema de Reservas de Salas de Estudo - Equipe 03
 
 Este projeto é a evolução do sistema de reservas de salas de aula, migrando de sockets puros para uma arquitetura baseada em API RESTful, e agora na **Entrega 3** introduzindo a Interface Gráfica Web com atualização em tempo real e Persistência de Dados.
 
